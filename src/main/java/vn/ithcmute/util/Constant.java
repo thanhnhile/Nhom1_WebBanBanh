@@ -4,6 +4,7 @@ public class Constant {
 	public static String DIR;
 	public static final String SESSION_USERNAME = "username";
 	public static final String COOKIE_REMEMBER = "username";
+	public static final String regex = "[1-9]";
 	
 	public static class Path {
 		public static final String LOGIN = "/decorators/login.jsp";
