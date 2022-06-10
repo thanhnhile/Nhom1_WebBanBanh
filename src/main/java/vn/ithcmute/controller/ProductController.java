@@ -36,7 +36,7 @@ public class ProductController extends HttpServlet {
 		if (indexPage == null || !indexPage.matches(Constant.regex)) {
 			indexPage = "1";
 		}
-		if(cid.matches(Constant.regex)) {
+		if(cid != null && !cid.trim().isEmpty()) {
 			int index = Integer.parseInt(indexPage);
 			int cid1 = Integer.parseInt(cid);
 

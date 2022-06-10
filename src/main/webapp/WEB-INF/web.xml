@@ -13,8 +13,8 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <session-config>
-    <tracking-mode>COOKIE</tracking-mode>
-  </session-config>
+     <tracking-mode>COOKIE</tracking-mode>
+ </session-config> 
   <error-page>
     <error-code>500</error-code>
     <location>/views/error-pages/error500.jsp</location>
