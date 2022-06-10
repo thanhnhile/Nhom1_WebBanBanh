@@ -15,6 +15,7 @@ import vn.ithcmute.model.ProductModel;
 import vn.ithcmute.model.ReceiptDetailModel;
 import vn.ithcmute.service.ProductService;
 import vn.ithcmute.service.impl.ProductServiceImpl;
+import vn.ithcmute.util.Constant;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = { "/cart-add" }) // ?pId=123
@@ -29,29 +30,31 @@ public class CartAddController extends HttpServlet {
 		
 		String pId = req.getParameter("pId");
 		String quantity = req.getParameter("quantity");
-		
-		ProductModel product = productService.get(Integer.parseInt(pId));
-		ReceiptDetailModel ReceiptDetail = new ReceiptDetailModel();
-		
-		ReceiptDetail.setAmount(Integer.parseInt(quantity));
-		ReceiptDetail.setpId(product);
-		
-		HttpSession httpSession = req.getSession();
-		Object obj = httpSession.getAttribute("cart");
-		if (obj == null) {
-			Map<Integer, ReceiptDetailModel> map = new HashMap<Integer, ReceiptDetailModel>();
-			map.put(ReceiptDetail.getpId().getpID(), ReceiptDetail);
-			httpSession.setAttribute("cart", map);
-		} else {
-			Map<Integer, ReceiptDetailModel> map = extracted(obj);
-			ReceiptDetailModel existedReceiptDetail = map.get(Integer.valueOf(pId));
-			if (existedReceiptDetail == null) {
-				map.put(product.getpID(), ReceiptDetail);
+		if(quantity.matches(Constant.regex)) {
+			ProductModel product = productService.get(Integer.parseInt(pId));
+			ReceiptDetailModel ReceiptDetail = new ReceiptDetailModel();
+			
+			ReceiptDetail.setAmount(Integer.parseInt(quantity));
+			ReceiptDetail.setpId(product);
+			
+			HttpSession httpSession = req.getSession();
+			Object obj = httpSession.getAttribute("cart");
+			if (obj == null) {
+				Map<Integer, ReceiptDetailModel> map = new HashMap<Integer, ReceiptDetailModel>();
+				map.put(ReceiptDetail.getpId().getpID(), ReceiptDetail);
+				httpSession.setAttribute("cart", map);
 			} else {
-				existedReceiptDetail.setAmount(existedReceiptDetail.getAmount() + Integer.parseInt(quantity));
+				Map<Integer, ReceiptDetailModel> map = extracted(obj);
+				ReceiptDetailModel existedReceiptDetail = map.get(Integer.valueOf(pId));
+				if (existedReceiptDetail == null) {
+					map.put(product.getpID(), ReceiptDetail);
+				} else {
+					existedReceiptDetail.setAmount(existedReceiptDetail.getAmount() + Integer.parseInt(quantity));
+				}
+				httpSession.setAttribute("cart", map);
 			}
-			httpSession.setAttribute("cart", map);
 		}
+		else System.out.print("Invalid");
 		resp.sendRedirect(req.getContextPath() + "/cart");
 	}
 

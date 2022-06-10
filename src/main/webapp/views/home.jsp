@@ -4,7 +4,6 @@
 
 
 <!--slide banner section start-->
-<h2>${path}</h2>
 <div class="hero_banner_section d-flex align-items-center mb-110">
 	<div class="container">
 		<div class="hero_banner_inner">

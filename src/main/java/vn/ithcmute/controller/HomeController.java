@@ -29,8 +29,6 @@ public class HomeController extends HttpServlet {
 		
 		String realPath = req.getServletContext().getRealPath("/upload");
 		Constant.DIR = realPath;
-		// 
-		req.setAttribute("path", Constant.DIR);
 				
 		//bước 1:Khởi tạo DAO
 		ProductDaoImpl productDao = new ProductDaoImpl();
