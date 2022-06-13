@@ -44,7 +44,7 @@
 				required>
 			<input type="hidden" name="<csrf:tokenname/>" value="<csrf:tokenvalue uri="register"/>"/>
 			<button class="btn btn-primary btn-block" type="submit" id="btnSignup"><i class="fas fa-user-plus"></i> Sign Up</button>
-			<a href="/BanBanhNgot/home"><i class="fas fa-angle-left"></i>
+			<a href="${pageContext.request.contextPath}/home"><i class="fas fa-angle-left"></i>
 				Back</a>
 		</form>
 	</div>
