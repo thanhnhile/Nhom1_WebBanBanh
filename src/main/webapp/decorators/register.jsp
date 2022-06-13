@@ -42,6 +42,7 @@
 			<input name="repass" value="${repassword}" type="password"
 				id="inputRePassword" class="form-control" placeholder="Repeat Password"
 				required>
+			<input type="hidden" name="<csrf:tokenname/>" value="<csrf:tokenvalue uri="register"/>"/>
 			<button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
 			<a href="/BanBanhNgot/home"><i class="fas fa-angle-left"></i>
 				Back</a>

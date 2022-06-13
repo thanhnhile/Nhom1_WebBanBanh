@@ -21,7 +21,7 @@
 										<li class="nav-item"><a class="nav-link"
 											href="${pageContext.request.contextPath}/login">Login</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="${pageContext.request.contextPath}/register">Register</a></li>
+											href="${pageContext.request.contextPath}/register?<csrf:token uri="${pageContext.request.contextPath}/register"/>">Register</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="nav-item"><a class="nav-link"
@@ -81,7 +81,7 @@
 						</form>
 					</div>
 					<a class="btn btn-success btn-sm ml-3"
-						href="${pageContext.request.contextPath }/cart"> <c:set
+						href="${pageContext.request.contextPath }/cart?<csrf:token uri="${pageContext.request.contextPath}/cart"/>"> <c:set
 							var="count" value="${0}" /> <c:forEach
 							items="${sessionScope.cart}" var="map">
 							<c:set var="count" value="${count + map.value.amount}" />
