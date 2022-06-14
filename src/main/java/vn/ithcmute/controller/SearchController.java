@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import vn.ithcmute.dao.impl.CategoryDaoImpl;
 import vn.ithcmute.dao.impl.ProductDaoImpl;
 import vn.ithcmute.model.CategoryModel;
@@ -25,6 +27,9 @@ public class SearchController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String txt1 = req.getParameter("txt");
 		String cid = req.getParameter("cid");
+		
+		String xssInput = StringEscapeUtils.escapeHtml3(txt1);
+		
 		// bước 1: Khởi tạo DAO
 		ProductDaoImpl productDao = new ProductDaoImpl();
 		CategoryDaoImpl cateDao = new CategoryDaoImpl();
@@ -33,8 +38,9 @@ public class SearchController extends HttpServlet {
 		List<CategoryModel> listC = cateDao.getAllCategory();
 		List<ProductModel> list = productDao.search(txt1);
 
+		
 		// bước 3: Thiết lập dữ liệu lên JSP
-		req.setAttribute("txtS", txt1);
+		req.setAttribute("txtS", xssInput);
 		req.setAttribute("listAllproduct", list);
 		req.setAttribute("cate", listC);
 		req.setAttribute("listcate", listC);

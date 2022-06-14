@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import vn.ithcmute.model.UserModel;
 import vn.ithcmute.service.UserService;
 import vn.ithcmute.service.impl.UserServiceImpl;
+import vn.ithcmute.util.HttpService;
 
 @WebServlet(urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
@@ -63,7 +64,7 @@ public class LoginController extends HttpServlet {
 		String alertMsg = "";
 
 		if (username.isEmpty() || password.isEmpty()) {
-			alertMsg = "Username và password không bỏ trống!";
+			alertMsg = "Username và  password không để trống!";
 			req.setAttribute("mess", alertMsg);
 			req.getRequestDispatcher("/decorators/login.jsp").forward(req, resp);
 			return;
@@ -81,10 +82,14 @@ public class LoginController extends HttpServlet {
 				//saveRemeberMe(resp, username);
 				Cookie u = new  Cookie("userC", username);
 				Cookie p = new  Cookie("passC", password);
-				u.setMaxAge(60);
-				p.setMaxAge(60);
-				resp.addCookie(u);
-				resp.addCookie(p);
+				u.setHttpOnly(true);
+				p.setHttpOnly(true);
+				u.setMaxAge(30*60);
+				p.setMaxAge(30*60);
+//				resp.addCookie(u);
+//				resp.addCookie(p);
+				HttpService.addCookie(resp, u, "Strict");
+				HttpService.addCookie(resp, p, "Strict");
 			}
 
 			resp.sendRedirect(req.getContextPath() + "/waiting");

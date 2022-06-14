@@ -4,10 +4,6 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
@@ -35,10 +31,10 @@
 				Sign in</h1>
 			<p class="text-danger">${mess}</p>
 			<input name="username" value="${username}" type="text" id="inputEmail"
-				class="form-control" placeholder="Username" required autofocus>
+				class="form-control" placeholder="Username" required autofocus maxlength="50">
 			<input name="password" value="${password}" type="password"
 				id="inputPassword" class="form-control" placeholder="Password"
-				required>
+				required maxlength="50">
 
 			<div class="form-group form-check">
 				<input name="remember" value="1" type="checkbox"
@@ -52,7 +48,9 @@
 		</form>
 	</div>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
