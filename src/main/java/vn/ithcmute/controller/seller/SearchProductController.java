@@ -16,6 +16,7 @@ import vn.ithcmute.service.CategoryService;
 import vn.ithcmute.service.ProductService;
 import vn.ithcmute.service.impl.CategoryServiceImpl;
 import vn.ithcmute.service.impl.ProductServiceImpl;
+import vn.ithcmute.util.Constant;
 
 
 @WebServlet(urlPatterns = { "/seller/product/search" })
@@ -35,11 +36,11 @@ public class SearchProductController extends HttpServlet {
 		ArrayList<CategoryModel> listCate = categoryService.getAllCategory();
 		String txt = req.getParameter("sTxt");
 		String cateID = req.getParameter("cate");
-		if(txt!=null) {
+		if(txt!=null && !txt.trim().isEmpty()) {
 			list = productService.search(txt);
 			req.setAttribute("sTXT", txt);
 			req.setAttribute("listAll", list);
-		}else if(cateID!=null) {
+		}else if(cateID.matches(Constant.regex)) {
 			list = productService.getProductByCID(Integer.parseInt(cateID));
 			req.setAttribute("cateID", Integer.parseInt(cateID));
 			req.setAttribute("listAll", list);

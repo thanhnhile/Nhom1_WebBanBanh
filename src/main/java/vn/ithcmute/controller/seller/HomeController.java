@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import vn.ithcmute.model.ProductModel;
-import vn.ithcmute.model.ShopModel;
 import vn.ithcmute.model.UserModel;
 import vn.ithcmute.service.ProductService;
 import vn.ithcmute.service.ReceiptService;
@@ -20,7 +19,6 @@ import vn.ithcmute.service.ShopService;
 import vn.ithcmute.service.impl.ProductServiceImpl;
 import vn.ithcmute.service.impl.ReceiptServiceImpl;
 import vn.ithcmute.service.impl.ShopServiceImpl;
-import vn.ithcmute.util.ShopID;
 
 
 @WebServlet(urlPatterns= {"/seller/home"})
@@ -40,25 +38,22 @@ public class HomeController extends HttpServlet{
 		HttpSession httpSession = req.getSession(false);
 		if(httpSession != null && httpSession.getAttribute("acc") != null) {
 			UserModel user = (UserModel)httpSession.getAttribute("acc");
-			ShopModel shopModel = user.getShop();
-			ShopID.sID=shopModel.getsID();
-		
-			
-			int countAllProduct = productService.CountProduct();
-			int countActiveProduct = productService.countActiveProduct();
-			int countNoActiveProduct =productService.countNoActiveProduct();
-			int countNoneProduct = productService.countNoneProduct();
+			int sID = user.getShop().getsID();
+			int countAllProduct = productService.countProduct(sID);
+			int countActiveProduct = productService.countActiveProduct(sID);
+			int countNoActiveProduct =productService.countNoActiveProduct(sID);
+			int countNoneProduct = productService.countNoneProduct(sID);
 			
 			//int countRAll = receiptService.countAll();
-			int countWaitting = receiptService.CountState(1);
-			int countDelivering = receiptService.CountState(2);
-			int countDelivered = receiptService.CountState(3);
-			int countCancelled = receiptService.CountState(4);
+			int countWaitting = receiptService.CountState(1,sID);
+			int countDelivering = receiptService.CountState(2,sID);
+			int countDelivered = receiptService.CountState(3,sID);
+			int countCancelled = receiptService.CountState(4,sID);
 			
 			//Top 4 New Product
-			List <ProductModel> list4New = productService.getTop4NewProduct();
+			List <ProductModel> list4New = productService.getTop4NewProduct(sID);
 			HashMap<Integer, Integer> map = productService.getSoldAmount();
-			List<ProductModel> litst4BestSell = productService.getTop4BestSeller();
+			List<ProductModel> litst4BestSell = productService.getTop4BestSeller(sID);
 			
 			req.setAttribute("countAll", countAllProduct);
 			req.setAttribute("countActive", countActiveProduct);

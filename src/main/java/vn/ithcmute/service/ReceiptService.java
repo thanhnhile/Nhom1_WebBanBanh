@@ -34,19 +34,19 @@ public interface ReceiptService {
 	Map<ShopModel, Integer> getAllShopByReceipt();
 
 	// Seller
-	List<ReceiptModel> getListByShopID(String sql);
+	List<ReceiptModel> getListByShopID(String sql,int sID);
 
-	List<ReceiptModel> getStateReceiptList(int stateID);
+	List<ReceiptModel> getStateReceiptList(int stateID,int sID);
 
-	List<ReceiptModel> getListByDate(Date dateStart, Date dateEnd);
+	List<ReceiptModel> getListByDate(Date dateStart, Date dateEnd,int sID);
 
-	int CountState(int stateID);
-
-	int countAll();
+	int countAll(int sID);
 	
-	Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByShop(int state);
+	Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByShop(int state,int sID);
 	
-	Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByDate(Date date1,Date date2);
+	Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByDate(Date date1,Date date2,int sID);
+
+	int CountState(int stateID, int sID);
 
 
 

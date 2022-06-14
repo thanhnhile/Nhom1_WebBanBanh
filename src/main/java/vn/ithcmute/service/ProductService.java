@@ -14,21 +14,12 @@ public interface ProductService {
 
 	ProductModel get(int id);
 
-	List<ProductModel> getAll();
 
 	void activeProduct(int pID, int state);
 
 	List<ProductModel> search(String txt);
 
 	List<ProductModel> getProductByCID(int cateID);
-
-	List<ProductModel> getActiveProduct();
-
-	List<ProductModel> getNoActiveProduct();
-
-	List<ProductModel> getOutOfStockProduct();
-
-	int CountProduct();
 	
 	List<ProductModel> getTop8New();
 	List<ProductModel> getTop8BestSeller();
@@ -46,15 +37,25 @@ public interface ProductService {
 	Map<ShopModel, Integer> getAllShopByProduct();
 	
 	//Seller
-	int countNoneProduct();
+	int countNoneProduct(int sID);
 		
-	int countNoActiveProduct();
+	int countNoActiveProduct(int sID);
 
-	int countActiveProduct();
+	int countActiveProduct(int sID);
 		
 	HashMap<Integer, Integer> getSoldAmount();
 
-	List<ProductModel> getTop4NewProduct();
+	List<ProductModel> getTop4NewProduct(int sID);
 
-	List<ProductModel> getTop4BestSeller();
+	List<ProductModel> getTop4BestSeller(int sID);
+
+	List<ProductModel> getAllByShop(int sID);
+
+	List<ProductModel> getActiveProduct(int sID);
+
+	List<ProductModel> getNoActiveProduct(int sID);
+
+	List<ProductModel> getOutOfStockProduct(int sID);
+
+	int countProduct(int sID);
 }

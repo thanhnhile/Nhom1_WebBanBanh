@@ -53,8 +53,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductModel> getAll() {
-		return dao.getAll();
+	public List<ProductModel> getAllByShop(int sID) {
+		return dao.getAllByShop(sID);
 	}
 	public static void main(String[] args) {
 		ProductServiceImpl serviceImpl = new ProductServiceImpl();
@@ -74,24 +74,20 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductModel> getActiveProduct() {
-		return dao.getActiveProduct();
+	public List<ProductModel> getActiveProduct(int sID) {
+		return dao.getActiveProduct(sID);
 	}
 
 	@Override
-	public List<ProductModel> getNoActiveProduct() {
-		return dao.getNoActiveProduct();
+	public List<ProductModel> getNoActiveProduct(int sID) {
+		return dao.getNoActiveProduct(sID);
 	}
 
 	@Override
-	public List<ProductModel> getOutOfStockProduct() {
-		return dao.getOutOfStockProduct();
+	public List<ProductModel> getOutOfStockProduct(int sID) {
+		return dao.getOutOfStockProduct(sID);
 	}
 
-	@Override
-	public int CountProduct() {
-		return dao.CountProduct();
-	}
 
 	@Override
 	public List<ProductModel> getTop8New() {
@@ -151,21 +147,21 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int countNoneProduct() {
+	public int countNoneProduct(int sID) {
 		// TODO Auto-generated method stub
-		return dao.countNoneProduct();
+		return dao.countNoneProduct(sID);
 	}
 
 	@Override
-	public int countNoActiveProduct() {
+	public int countNoActiveProduct(int sID) {
 		// TODO Auto-generated method stub
-		return dao.countNoActiveProduct();
+		return dao.countNoActiveProduct(sID);
 	}
 
 	@Override
-	public int countActiveProduct() {
+	public int countActiveProduct(int sID) {
 		// TODO Auto-generated method stub
-		return dao.countActiveProduct();
+		return dao.countActiveProduct(sID);
 	}
 
 	@Override
@@ -175,15 +171,25 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductModel> getTop4NewProduct() {
+	public List<ProductModel> getTop4NewProduct(int sID) {
 		// TODO Auto-generated method stub
-		return dao.getTop4NewProduct();
+		return dao.getTop4NewProduct(sID);
 	}
 
 	@Override
-	public List<ProductModel> getTop4BestSeller() {
+	public List<ProductModel> getTop4BestSeller(int sID) {
 		// TODO Auto-generated method stub
-		return dao.getTop4BestSeller();
+		return dao.getTop4BestSeller(sID);
 	}
+
+	@Override
+	public int countProduct(int sID) {
+		// TODO Auto-generated method stub
+		return dao.countProduct(sID);
+	}
+
+	
+
+	
 
 }

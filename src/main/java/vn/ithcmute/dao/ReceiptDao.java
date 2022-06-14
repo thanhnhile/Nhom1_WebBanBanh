@@ -27,13 +27,13 @@ public interface ReceiptDao {
 	Map<ShopModel, Integer> getAllShopByReceipt();
 	
 	//Seller
-	List<ReceiptModel> getListByShopID(String sql);
+	List<ReceiptModel> getListByShopID(String sql,int sID);
 	
-	List<ReceiptModel> getStateReceiptList(int stateID);
+	List<ReceiptModel> getStateReceiptList(int stateID,int sID);
 	
-	List<ReceiptModel> getListByDate(Date dateStart,Date dateEnd);
-	
-	int CountState(int stateID);
+	List<ReceiptModel> getListByDate(Date dateStart,Date dateEnd,int sID);
 
-	int countAll();
+	int countAll(int sID);
+
+	int countState(int stateID, int sID);
 }
