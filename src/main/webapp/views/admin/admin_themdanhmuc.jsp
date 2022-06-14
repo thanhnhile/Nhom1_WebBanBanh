@@ -70,6 +70,7 @@
 										<input type="text" class="form-control" name="catename" placeholder="" required>
 									</div>
 									</div>
+								<input type="hidden" name="<csrf:tokenname/>" value="<csrf:tokenvalue uri="${pageContext.request.contextPath }/admin/cate/list"/>"/>	
 								<div class="form-actions right">
 									<button type="submit" class="btn green">Submit</button>
 								</div>

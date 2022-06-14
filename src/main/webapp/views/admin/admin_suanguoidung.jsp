@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
@@ -66,28 +68,28 @@
 							<form role="form" action="${pageContext.request.contextPath }/admin/user/list?type=edit" method="post">
 							<div class="form-body">
 									<div class="form-group">
-										<input type="hidden" class="form-control" name="uid" value='${user.uid }'>
+										<input type="hidden" class="form-control" name="uid" value='${fn:escapeXml(user.uid)}'>
 									</div>
 									<div class="form-group">
 										<label>Username:</label>
-										<input type="text" class="form-control" name="username" value='${user.uname }' required>
+										<input type="text" class="form-control" name="username" value='${fn:escapeXml(user.uname) }' required>
 									</div>
 									<div class="form-group">
 										<label>Password:</label>
-										<input type="password" class="form-control" name="password" value='${user.upass }' required>
+										<input type="password" class="form-control" name="password" value='${fn:escapeXml(user.upass) }' required>
 									</div>
 									<div class="form-group">
 										<label>Is Admin: </label>
 										<select class="form-control" name="isAd">
-											<option value='0' ${user.isAd==0 ? "selected":""}>False</option>
-											<option value='1' ${user.isAd==1 ? "selected":""}>True</option>
+											<option value='0' ${fn:escapeXml(user.isAd)==0 ? "selected":""}>False</option>
+											<option value='1' ${fn:escapeXml(user.isAd)==1 ? "selected":""}>True</option>
 										</select>
 									</div>
 									<div class="form-group">
 										<label>Is Seller: </label>
 										<select class="form-control" name="isSel">
-											<option value='0' ${user.isSel==0 ? "selected":""}>False</option>
-											<option value='1' ${user.isSel==1 ? "selected":""}>True</option>
+											<option value='0' ${fn:escapeXml(user.isSel)==0 ? "selected":""}>False</option>
+											<option value='1' ${fn:escapeXml(user.isSel)==1 ? "selected":""}>True</option>
 										</select>
 									</div>
 									<div class="form-group">
@@ -96,17 +98,18 @@
 											<option value='0'>Null</option>
 											<c:forEach items="${shopList }" var="s">
 											<c:choose>
-												<c:when test="${not empty user.shop }">
-												<option value='${s.sID }' ${user.shop.sID==s.sID ? "selected":""}> ${s.sName } </option>
+												<c:when test="${not empty fn:escapeXml(user.shop) }">
+												<option value='${fn:escapeXml(s.sID) }' ${fn:escapeXml(user.shop.sID)==s.sID ? "selected":""}> ${fn:escapeXml(s.sName) } </option>
 												</c:when>
 												<c:otherwise>
-												<option value='${s.sID }'> ${s.sName } </option>
+												<option value='${fn:escapeXml(s.sID) }'> ${fn:escapeXml(s.sName) } </option>
 												</c:otherwise>
 											</c:choose>
 											</c:forEach>
 										</select>
 									</div>
 									</div>
+								<input type="hidden" name="<csrf:tokenname/>" value="<csrf:tokenvalue uri="${pageContext.request.contextPath }/admin/user/list"/>"/>	
 								<div class="form-actions right">
 									<button type="submit" class="btn green">Submit</button>
 								</div>

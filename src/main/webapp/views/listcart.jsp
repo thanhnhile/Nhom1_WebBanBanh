@@ -97,7 +97,7 @@
 						class="btn btn-block btn-light">Continue Shopping</a>
 				</div>
 				<div class="col-sm-12 col-md-6 text-right">
-					<a href="${pageContext.request.contextPath}/order?comID=${comID}"
+					<a href="${pageContext.request.contextPath}/order?comID=${comID}&<csrf:token uri="${pageContext.request.contextPath}/order"/>"
 						class="btn btn-lg btn-block btn-success text-uppercase" type="submit">Checkout</a>
 				</div>
 			</div>

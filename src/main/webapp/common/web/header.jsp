@@ -58,7 +58,7 @@
 								<li><a href="#">Category</a>
 									<ul class="bucker-dropdown">
 										<c:forEach items="${listcate}" var="o">
-											<li><a href="product?cid=${o.cID}">${o.cName}</a></li>
+											<li><a href="product?cid=${o.cID}"><c:out value="${o.cName}" /></a></li>
 										</c:forEach>
 									</ul></li>
 								<li><a href="${pageContext.request.contextPath}/views/contact.jsp">Contact</a></li>

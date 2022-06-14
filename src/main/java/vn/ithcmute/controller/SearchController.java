@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 import vn.ithcmute.dao.impl.CategoryDaoImpl;
 import vn.ithcmute.dao.impl.ProductDaoImpl;
 import vn.ithcmute.model.CategoryModel;
@@ -25,6 +27,8 @@ public class SearchController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String txt1 = req.getParameter("txt");
 		String cid = req.getParameter("cid");
+		
+		txt1 = StringEscapeUtils.escapeHtml3(txt1);
 		// bước 1: Khởi tạo DAO
 		ProductDaoImpl productDao = new ProductDaoImpl();
 		CategoryDaoImpl cateDao = new CategoryDaoImpl();
