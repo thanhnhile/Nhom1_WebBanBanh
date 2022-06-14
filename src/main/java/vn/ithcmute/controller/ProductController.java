@@ -81,7 +81,7 @@ public class ProductController extends HttpServlet {
 			RequestDispatcher rq = req.getRequestDispatcher("/views/product.jsp");
 			rq.forward(req, resp);
 		}
-		resp.sendRedirect(req.getContextPath()+"/home");
+		else resp.sendRedirect(req.getContextPath()+"/home");
 		
 
 	}
@@ -91,4 +91,3 @@ public class ProductController extends HttpServlet {
 
 	}
 }
-

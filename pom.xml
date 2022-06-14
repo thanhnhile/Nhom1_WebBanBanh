@@ -92,7 +92,11 @@
 			<version>1.9.13</version>
 		</dependency>
 		<!-- end json -->
-
+		<dependency>
+	        <groupId>org.apache.commons</groupId>
+	        <artifactId>commons-lang3</artifactId>
+   			<version>3.3</version>
+   		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

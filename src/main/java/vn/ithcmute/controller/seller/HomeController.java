@@ -76,7 +76,6 @@ public class HomeController extends HttpServlet{
 			
 			req.getRequestDispatcher("/views/seller/home.jsp").forward(req, resp);
 		}
-		resp.sendRedirect(req.getContextPath()+"/login");
 		
 	}
 

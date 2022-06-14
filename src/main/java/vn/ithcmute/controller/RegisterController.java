@@ -50,13 +50,13 @@ public class RegisterController extends HttpServlet {
 		UserService service = new UserServiceImpl();
 		String messMsg = "";
 		if (service.checkExistUsername(username) & password!= repassword) {
-			messMsg = "Username đã tồn tại! hoặc password không khớp";
+			messMsg = "Username đã tồn tại hoặc mật khẩu không khớp!";
 			req.setAttribute("mess", messMsg);
 			req.getRequestDispatcher("/decorators/register.jsp").forward(req, resp);
 			return;
 		}
 		/*if (password!= repassword) {
-			messMsg = "Password không trùng khớp!";
+			messMsg = "Password khĂ´ng trĂ¹ng khá»›p!";
 			req.setAttribute("mess", messMsg);
 			req.getRequestDispatcher("/decorators/register.jsp").forward(req, resp);
 			return;
@@ -68,7 +68,7 @@ public class RegisterController extends HttpServlet {
 			req.setAttribute("mess", messMsg);
 			resp.sendRedirect(req.getContextPath() + "/login");
 		} else {
-			messMsg = "Lỗi hệ thống!";
+			messMsg = "Đăng ký chưa thành công!";
 			req.setAttribute("mess", messMsg);
 			req.getRequestDispatcher(Constant.Path.REGISTER).forward(req, resp);
 		}
