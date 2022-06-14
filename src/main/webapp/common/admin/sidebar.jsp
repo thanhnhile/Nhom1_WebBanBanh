@@ -40,12 +40,12 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="${pageContext.request.contextPath }/admin/user/list?type=list">
+							<a href="${pageContext.request.contextPath }/admin/user/list?type=list&<csrf:token uri="${pageContext.request.contextPath}/admin/user/list"/>">
 							<i class="icon-home"></i>
 							Danh Sách Người Dùng</a>
 						</li>
 						<li>
-							<a href="${pageContext.request.contextPath }/admin/user/list?type=add">
+							<a href="${pageContext.request.contextPath }/admin/user/list?type=add&<csrf:token uri="${pageContext.request.contextPath}/admin/user/list"/>">
 							<i class="icon-basket"></i>
 							Thêm Người Dùng</a>
 						</li>
@@ -59,11 +59,11 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="${pageContext.request.contextPath }/admin/cate/list?type=list">
+							<a href="${pageContext.request.contextPath }/admin/cate/list?type=list&<csrf:token uri="${pageContext.request.contextPath}/admin/cate/list"/>">
 							Danh Sách Danh Mục</a>
 						</li>
 						<li>
-							<a href="${pageContext.request.contextPath }/admin/cate/list?type=add">
+							<a href="${pageContext.request.contextPath }/admin/cate/list?type=add&<csrf:token uri="${pageContext.request.contextPath}/admin/cate/list"/>">
 							Thêm Danh Mục</a>
 						</li>
 					</ul>

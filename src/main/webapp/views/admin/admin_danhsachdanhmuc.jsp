@@ -58,7 +58,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="btn-group">
-									<a href="${pageContext.request.contextPath }/admin/cate/list?type=add">
+									<a href="${pageContext.request.contextPath }/admin/cate/list?type=add&<csrf:token uri="${pageContext.request.contextPath}/admin/cate/list"/>">
 										<button id="sample_editable_1_new" class="btn green">
 											Add New <i class="fa fa-plus"></i>
 										</button>
@@ -94,10 +94,10 @@
 									<td >${c.cID }</td>
 									<td>${c.cName }</td>
 									<td>
-										<a href="${pageContext.request.contextPath }/admin/cate/list?type=delete&cid=${c.cID }">
+										<a href="${pageContext.request.contextPath }/admin/cate/list?type=delete&cid=${c.cID }&<csrf:token uri="${pageContext.request.contextPath}/admin/cate/list"/>">
 										<button type="button" class="btn red btn-xs">Xóa</button> 
 										</a>
-										<a href="${pageContext.request.contextPath }/admin/cate/list?type=edit&cid=${c.cID }">
+										<a href="${pageContext.request.contextPath }/admin/cate/list?type=edit&cid=${c.cID }&<csrf:token uri="${pageContext.request.contextPath}/admin/cate/list"/>">
 										<button type="button" class="btn blue btn-xs">Sữa</button>
 										</a>
 									</td>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
@@ -92,11 +93,12 @@
 										<select class="form-control" name="shop">
 											<option value='0'>Null</option>
 											<c:forEach items="${shopList }" var="s">
-											<option value='${s.sID }'> ${s.sName } </option>
+											<option value='${fn:escapeXml(s.sID) }'> ${fn:escapeXml(s.sName) } </option>
 											</c:forEach>
 										</select>
 									</div>
 									</div>
+								<input type="hidden" name="<csrf:tokenname/>" value="<csrf:tokenvalue uri="${pageContext.request.contextPath }/admin/user/list"/>"/>
 								<div class="form-actions right">
 									<button type="submit" class="btn green">Submit</button>
 								</div>
