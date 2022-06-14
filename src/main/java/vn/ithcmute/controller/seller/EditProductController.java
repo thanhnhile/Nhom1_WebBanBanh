@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import vn.ithcmute.model.CategoryModel;
 import vn.ithcmute.model.ProductModel;
+import vn.ithcmute.model.UserModel;
 import vn.ithcmute.service.CategoryService;
 import vn.ithcmute.service.ProductService;
 import vn.ithcmute.service.ShopService;
@@ -29,7 +30,7 @@ import vn.ithcmute.service.impl.CategoryServiceImpl;
 import vn.ithcmute.service.impl.ProductServiceImpl;
 import vn.ithcmute.service.impl.ShopServiceImpl;
 import vn.ithcmute.util.Constant;
-import vn.ithcmute.util.ShopID;
+
 
 
 @WebServlet(urlPatterns= {"/seller/product/edit"})
@@ -106,8 +107,11 @@ public class EditProductController extends HttpServlet{
 			}
 			product.setpActive(1);
 			//Lay id cua user tu session truy van ra shop bo vo day
-			int sID = ShopID.sID;
-			product.setShop(shopService.get(sID));
+			HttpSession httpSession = req.getSession(false);
+			if(httpSession != null && httpSession.getAttribute("acc") != null) {
+				UserModel user = (UserModel)httpSession.getAttribute("acc");
+				product.setShop(user.getShop());
+			}
 			if(action.equals("add")) {
 				productService.insert(product);
 			} else if(action.equals("update")) {

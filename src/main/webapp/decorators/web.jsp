@@ -5,6 +5,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://apis.google.com">
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>Bucker – Bakery Shop HTML Template</title>

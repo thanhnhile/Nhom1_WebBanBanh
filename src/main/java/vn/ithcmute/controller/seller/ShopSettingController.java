@@ -7,16 +7,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import vn.ithcmute.model.ShopModel;
+import vn.ithcmute.model.UserModel;
 import vn.ithcmute.service.ProductService;
 import vn.ithcmute.service.ReceiptService;
 import vn.ithcmute.service.ShopService;
 import vn.ithcmute.service.impl.ProductServiceImpl;
 import vn.ithcmute.service.impl.ReceiptServiceImpl;
 import vn.ithcmute.service.impl.ShopServiceImpl;
-import vn.ithcmute.util.ShopID;
+
 
 
 @WebServlet(urlPatterns = { "/seller/shop/setting" })
@@ -34,18 +35,27 @@ public class ShopSettingController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		// Lay shop model tu User
-		int sID = ShopID.sID;
-		ShopModel shop = shopService.get(sID);
+		HttpSession session = req.getSession(false);
+		if(session != null && session.getAttribute("acc") != null) {
+			UserModel userModel = (UserModel)session.getAttribute("acc");
+			int sID = userModel.getShop().getsID();
+			if(sID != 0) {
+				ShopModel shop = shopService.get(sID);
+				
+				int countProduct = productService.countProduct(sID);
+				int countDelivered = receiptService.CountState(3,sID);
+				// Day len trang JSP
+				String msg = "Xem tÃ¬nh tráº¡ng vÃ  thÃ´ng tin Shop";
+				req.setAttribute("msg", msg);
+				req.setAttribute("shop", shop);
+				req.setAttribute("countProduct", countProduct);
+				req.setAttribute("countDelivered", countDelivered);
+				req.getRequestDispatcher("/views/seller/setting-shop.jsp").forward(req, resp);
+			}
+			else resp.sendRedirect(req.getPathInfo()+"/seller/login");
+		}
 		
-		int countProduct = productService.CountProduct();
-		int countDelivered = receiptService.CountState(3);
-		// Day len trang JSP
-		String msg = "Xem tình trạng và thông tin Shop";
-		req.setAttribute("msg", msg);
-		req.setAttribute("shop", shop);
-		req.setAttribute("countProduct", countProduct);
-		req.setAttribute("countDelivered", countDelivered);
-		req.getRequestDispatcher("/views/seller/setting-shop.jsp").forward(req, resp);
+		
 	}
 
 	@Override
@@ -67,8 +77,10 @@ public class ShopSettingController extends HttpServlet {
 		sModel.setsPhone(sPhone);
 		sModel.setsAddrs(sAddrs);
 		shopService.edit(sModel);
-		
-		int countProduct = productService.CountProduct();
+		HttpSession session = req.getSession(false);
+		UserModel userModel = (UserModel)session.getAttribute("acc");
+		int sID1 = userModel.getShop().getsID();
+		int countProduct = productService.countProduct(sID1);
 		
 		msg = "Chỉnh sửa và xem thông tin Shop";
 		req.setAttribute("shop", sModel);

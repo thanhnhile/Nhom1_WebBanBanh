@@ -21,7 +21,7 @@
 										<li class="nav-item"><a class="nav-link"
 											href="${pageContext.request.contextPath}/login">Login</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="${pageContext.request.contextPath}/register">Register</a></li>
+											href="${pageContext.request.contextPath}/register?<csrf:token uri="${pageContext.request.contextPath}/register"/>">Register</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="nav-item"><a class="nav-link"
@@ -71,7 +71,7 @@
 						<form action="search" class="form-inline my-2 my-lg-0">
 							<div class="input-group input-group">
 								<input type="text" name="txt" value="${txtS}"
-									class="form-control" placeholder="Search...">
+									class="form-control" placeholder="Search..." maxlength="30">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-secondary btn-number">
 										<i class="pe-7s-search"></i>
@@ -81,7 +81,7 @@
 						</form>
 					</div>
 					<a class="btn btn-success btn-sm ml-3"
-						href="${pageContext.request.contextPath }/cart"> <c:set
+						href="${pageContext.request.contextPath }/cart?<csrf:token uri="${pageContext.request.contextPath}/cart"/>"> <c:set
 							var="count" value="${0}" /> <c:forEach
 							items="${sessionScope.cart}" var="map">
 							<c:set var="count" value="${count + map.value.amount}" />

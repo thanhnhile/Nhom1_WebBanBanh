@@ -7,14 +7,14 @@ import vn.ithcmute.model.StatisticsModel;
 
 public interface StatisticsDao {
 
-	List<StatisticsModel> getListAllReceipt();
+	List<StatisticsModel> getListAllReceipt(int sID);
 
-	List<StatisticsModel> getListDeliveredReceipt();
+	List<StatisticsModel> getListDeliveredReceipt(int sID);
 
-	List<StatisticsModel> getStatisticsCategory();
+	List<StatisticsModel> getStatisticsCategory(int sID);
 
-	List<StatisticsModel> getStatisticsProduct();
+	List<StatisticsModel> getStatisticsProduct(int sID);
 
-	List<StatisticsModel> getStatistics(String sql);
+	List<StatisticsModel> getStatistics(String sql, int sID);
 
 }
