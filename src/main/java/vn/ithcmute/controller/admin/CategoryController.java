@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import vn.ithcmute.model.CategoryModel;
 import vn.ithcmute.service.CategoryService;
 import vn.ithcmute.service.impl.CategoryServiceImpl;
@@ -74,8 +76,9 @@ public class CategoryController extends HttpServlet {
 		if (type.equals("add"))
 		{
 			String cName = req.getParameter("catename");
+			String xssInput = StringEscapeUtils.escapeHtml3(cName);
 			CategoryModel cateModel = new CategoryModel();
-			cateModel.setcName(cName);
+			cateModel.setcName(xssInput);
 			if (categoryService.isCategoryExist(cateModel) == 1)
 			{
 				String warn = "Danh mục đã tồn tại";
@@ -92,9 +95,10 @@ public class CategoryController extends HttpServlet {
 		{
 			int cID = Integer.parseInt(req.getParameter("cid"));
 			String cName = req.getParameter("catename");
+			String xssInput = StringEscapeUtils.escapeHtml3(cName);
 			CategoryModel cateModel = new CategoryModel();
 			cateModel.setcID(cID);
-			cateModel.setcName(cName);
+			cateModel.setcName(xssInput);
 			if (categoryService.isCategoryExist(cateModel) == 1)
 			{
 				String warn = "Danh mục đã tồn tại";
