@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import org.apache.commons.lang3.StringEscapeUtils;
+=======
+import org.apache.commons.text.StringEscapeUtils;
+>>>>>>> 34489b14826f3fee7e08b9978b5b2bc3f440c889
 
 import vn.ithcmute.model.CategoryModel;
 import vn.ithcmute.service.CategoryService;
@@ -77,6 +81,9 @@ public class CategoryController extends HttpServlet {
 		{
 			String cName = req.getParameter("catename");
 			String xssInput = StringEscapeUtils.escapeHtml3(cName);
+
+			cName = StringEscapeUtils.escapeHtml3(cName);
+			
 			CategoryModel cateModel = new CategoryModel();
 			cateModel.setcName(xssInput);
 			if (categoryService.isCategoryExist(cateModel) == 1)
@@ -95,7 +102,11 @@ public class CategoryController extends HttpServlet {
 		{
 			int cID = Integer.parseInt(req.getParameter("cid"));
 			String cName = req.getParameter("catename");
+
 			String xssInput = StringEscapeUtils.escapeHtml3(cName);
+
+			cName = StringEscapeUtils.escapeHtml3(cName);
+			
 			CategoryModel cateModel = new CategoryModel();
 			cateModel.setcID(cID);
 			cateModel.setcName(xssInput);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
@@ -58,7 +59,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="btn-group">
-									<a href="${pageContext.request.contextPath }/admin/user/list?type=add">
+									<a href="${pageContext.request.contextPath }/admin/user/list?type=add&<csrf:token uri="${pageContext.request.contextPath}/admin/user/list"/>">
 										<button id="sample_editable_1_new" class="btn green">
 											Add New <i class="fa fa-plus"></i>
 										</button>
@@ -95,11 +96,11 @@
 							<tbody>
 							<c:forEach items="${userList }" var="u">
 								<tr class="odd gradeX">
-									<td>${u.uid }</td>
-									<td>${u.uname }</td>
-									<td>${u.upass }</td>
+									<td><c:out value="${u.uid }"/></td>
+									<td><c:out value="${u.uname }"/></td>
+									<td><c:out value="${u.upass }"/></td>
 									<c:choose>
-										<c:when test="${u.isSel == '1' }">
+										<c:when test="${fn:escapeXml(u.isSel) == '1' }">
 											<td>True</td>
 										</c:when>
 										<c:otherwise>
@@ -107,7 +108,7 @@
 										</c:otherwise>
 									</c:choose>
 									<c:choose>
-										<c:when test="${u.isAd == '1' }">
+										<c:when test="${fn:escapeXml(u.isAd) == '1' }">
 											<td>True</td>
 										</c:when>
 										<c:otherwise>
@@ -115,18 +116,18 @@
 										</c:otherwise>
 									</c:choose>
 									<c:choose>
-										<c:when test="${not empty u.shop }">
-											<td>${u.shop.sName }</td>
+										<c:when test="${not empty fn:escapeXml(u.shop) }">
+											<td><c:out value="${fn:escapeXml(u.shop.sName) }"/></td>
 										</c:when>
 										<c:otherwise>
 											<td>Null</td>
 										</c:otherwise>
 									</c:choose>
 									<td>
-										<a href="${pageContext.request.contextPath }/admin/user/list?type=delete&uid=${u.uid }">
+										<a href="${pageContext.request.contextPath }/admin/user/list?type=delete&uid=${u.uid }&<csrf:token uri="${pageContext.request.contextPath}/admin/user/list"/>">
 										<button type="button" class="btn red btn-xs">Xóa</button> 
 										</a>
-										<a href="${pageContext.request.contextPath }/admin/user/list?type=edit&uid=${u.uid }">
+										<a href="${pageContext.request.contextPath }/admin/user/list?type=edit&uid=${u.uid }&<csrf:token uri="${pageContext.request.contextPath}/admin/user/list"/>">
 										<button type="button" class="btn blue btn-xs">Sữa</button>
 										</a>
 									</td>

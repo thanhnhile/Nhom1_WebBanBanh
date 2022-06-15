@@ -18,7 +18,7 @@ import vn.ithcmute.service.UserService;
 import vn.ithcmute.service.impl.ShopServiceImpl;
 import vn.ithcmute.service.impl.StateReceiptServiceImpl;
 import vn.ithcmute.service.impl.UserServiceImpl;
-import vn.ithcmute.util.ShopID;
+
 import vn.ithcmute.model.ReceiptModel;
 import vn.ithcmute.model.ShopModel;
 import vn.ithcmute.model.StateReceiptModel;
@@ -240,13 +240,13 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 	}
 
 	@Override
-	public List<ReceiptModel> getListByShopID(String sql) {
+	public List<ReceiptModel> getListByShopID(String sql,int sID) {
 		// TODO Auto-generated method stub
 		List<ReceiptModel> list = new ArrayList<ReceiptModel>();
 		try {
 			Connection con = new DBConnection().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, ShopID.sID);
+			ps.setInt(1, sID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ReceiptModel receipt = new ReceiptModel();
@@ -265,7 +265,7 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 	}
 
 	@Override
-	public List<ReceiptModel> getStateReceiptList(int stateID) {
+	public List<ReceiptModel> getStateReceiptList(int stateID,int sID) {
 		// TODO Auto-generated method stub
 		String sql = "select * from Receipt where StateID=? and ShopID=?";
 		List<ReceiptModel> list = new ArrayList<ReceiptModel>();
@@ -273,7 +273,7 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 			Connection con = new DBConnection().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, stateID);
-			ps.setInt(2, ShopID.sID);
+			ps.setInt(2, sID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ReceiptModel receipt = new ReceiptModel();
@@ -292,7 +292,7 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 	}
 
 	@Override
-	public List<ReceiptModel> getListByDate(java.sql.Date dateStart, java.sql.Date dateEnd) {
+	public List<ReceiptModel> getListByDate(java.sql.Date dateStart, java.sql.Date dateEnd,int sID) {
 		// TODO Auto-generated method stub
 		String sql = "select * from Receipt where Date between ? and ? and ShopID=?";
 		List<ReceiptModel> list = new ArrayList<ReceiptModel>();
@@ -301,7 +301,7 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setDate(1, dateStart);
 			ps.setDate(2, dateEnd);
-			ps.setInt(3, ShopID.sID);
+			ps.setInt(3, sID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				ReceiptModel receipt = new ReceiptModel();
@@ -320,14 +320,14 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 	}
 
 	@Override
-	public int CountState(int stateID) {
+	public int countState(int stateID, int sID) {
 		// TODO Auto-generated method stub
 		String sql = "select count(*) from Receipt where StateID=? and ShopId=?";
 		try {
 			Connection con = new DBConnection().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, stateID);
-			ps.setInt(2, ShopID.sID);
+			ps.setInt(2, sID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				return rs.getInt(1);
@@ -339,18 +339,18 @@ public class ReceiptDaoImpl extends DBConnection implements ReceiptDao {
 	}
 
 	@Override
-	public int countAll() {
+	public int countAll(int sID) {
 		// TODO Auto-generated method stub
 		String sql = "select count(*) from Receipt where ShopId=?";
-		return this.getCount(sql);
+		return this.getCount(sql,sID);
 	}
 
 	// Ham count chung
-	public int getCount(String sql) {
+	public int getCount(String sql,int sID) {
 		try {
 			Connection con = new DBConnection().getConnection();
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, ShopID.sID);
+			ps.setInt(1, sID);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				return rs.getInt(1);

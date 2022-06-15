@@ -15,6 +15,6 @@ public interface CategoryService {
 	ArrayList<CategoryModel> getAllCategory();
 	
 	int isCategoryExist(CategoryModel cate);
-	
-	List<CategoryModel> getListByShop();
+
+	List<CategoryModel> getListByShop(int sID);
 }

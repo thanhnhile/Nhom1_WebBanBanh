@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import vn.ithcmute.util.ShopID;
+
 
 
 @WebServlet(urlPatterns= {"/seller/logout"})
@@ -20,7 +20,6 @@ public class LogoutController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		session.removeAttribute("acc");
-		ShopID.sID=0;
 		resp.sendRedirect(req.getContextPath()+"/login");
 	}
 

@@ -46,9 +46,9 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryModel> getListByShop() {
+	public List<CategoryModel> getListByShop(int sID) {
 		// TODO Auto-generated method stub
-		return dao.getListByShop();
+		return dao.getListByShop(sID);
 	}
 
 }

@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import vn.ithcmute.model.DeliveryDetailModel;
 import vn.ithcmute.model.ReceiptDetailModel;
+import vn.ithcmute.model.UserModel;
 import vn.ithcmute.service.ReceiptDetailService;
 import vn.ithcmute.service.ReceiptService;
 import vn.ithcmute.service.impl.ReceiptDetailServiceImpl;
@@ -30,7 +32,9 @@ public class UpdateReceiptController extends HttpServlet{
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8"); 
-		
+		HttpSession session = req.getSession(false);
+		UserModel userModel = (UserModel)session.getAttribute("acc");
+		int sID = userModel.getShop().getsID();
 		int rID = Integer.parseInt(req.getParameter("rID"));
 		int state = Integer.parseInt(req.getParameter("state"));
 		
@@ -38,7 +42,7 @@ public class UpdateReceiptController extends HttpServlet{
 		if(msg!="") {
 			req.setAttribute("msg", msg);
 			Map<DeliveryDetailModel, List<ReceiptDetailModel>> map = new HashMap<DeliveryDetailModel, List<ReceiptDetailModel>>();
-			map = service.getReceiptListByShop(1);
+			map = service.getReceiptListByShop(1,sID);
 			req.setAttribute("orderList", map);
 			req.getRequestDispatcher("/views/seller/list-order.jsp").forward(req, resp);
 		}else if(state==4) {

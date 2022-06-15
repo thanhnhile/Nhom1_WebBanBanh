@@ -15,7 +15,7 @@ import vn.ithcmute.service.CategoryService;
 import vn.ithcmute.service.ShopService;
 import vn.ithcmute.service.impl.CategoryServiceImpl;
 import vn.ithcmute.service.impl.ShopServiceImpl;
-import vn.ithcmute.util.ShopID;
+
 
 public class ProductDaoImpl implements ProductDao{
 	Connection con = null;
@@ -104,13 +104,13 @@ public class ProductDaoImpl implements ProductDao{
 		return null;
 	}
 	@Override
-	public List<ProductModel> getAll() {
+	public List<ProductModel> getAllByShop(int sID) {
 		List<ProductModel> list = new ArrayList<ProductModel>();
 		String sql = "select * from Product where ShopID=?";
 		try {
 			con = new DBConnection().getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, ShopID.sID);
+			ps.setInt(1, sID);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ProductModel pModel = new ProductModel();
@@ -192,25 +192,25 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Override
-	public List<ProductModel> getActiveProduct() {
+	public List<ProductModel> getActiveProduct(int sID) {
 		String sql ="select * from Product where Active=1 and ShopID=?";
-		return this.getListProduct(sql);
+		return this.getListProduct(sql,sID);
 	}
 	@Override
-	public List<ProductModel> getNoActiveProduct() {
+	public List<ProductModel> getNoActiveProduct(int sID) {
 		String sql ="select * from Product where Active=0 and ShopID=?";
-		return this.getListProduct(sql);
+		return this.getListProduct(sql,sID);
 	}
 	@Override
-	public List<ProductModel> getOutOfStockProduct() {
+	public List<ProductModel> getOutOfStockProduct(int sID) {
 		String sql ="select * from Product where Amount=0 and ShopID=?";
-		return this.getListProduct(sql);
+		return this.getListProduct(sql,sID);
 	}
-	public int getCount(String sql) {
+	public int getCount(String sql,int sID) {
 		try {
 			con = new DBConnection().getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, ShopID.sID);
+			ps.setInt(1, sID);
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				return rs.getInt(1);
@@ -221,9 +221,9 @@ public class ProductDaoImpl implements ProductDao{
 		return 0;
 	}
 	@Override
-	public int CountProduct() {
+	public int countProduct(int sID) {
 		String sql="select count(*)  from Product where ShopID=?";
-		return this.getCount(sql);
+		return this.getCount(sql,sID);
 	}
 	@Override
 	public List<ProductModel> getTop8New() {
@@ -481,21 +481,21 @@ public class ProductDaoImpl implements ProductDao{
 		return map;
 	}
 	@Override
-	public int countNoneProduct() {
+	public int countNoneProduct(int sID) {
 		// TODO Auto-generated method stub
 		String sql = "select count(*)  from Product where Amount=0 and ShopID=?";
-		return this.getCount(sql);
+		return this.getCount(sql,sID);
 	}
 	@Override
-	public int countNoActiveProduct() {
+	public int countNoActiveProduct(int sID) {
 		// TODO Auto-generated method stub
 		String sql = "select count(*)  from Product where Active=0 and ShopID=?";
-		return this.getCount(sql);
+		return this.getCount(sql,sID);
 	}
 	@Override
-	public int countActiveProduct() {
+	public int countActiveProduct(int sID) {
 		String sql = "select count(*)  from Product where Active=1 and ShopID=?";
-		return this.getCount(sql);
+		return this.getCount(sql,sID);
 	}
 	@Override
 	public HashMap<Integer, Integer> getSoldAmount() {
@@ -520,12 +520,12 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return map;
 	}
-	public List<ProductModel> getListProduct(String sql) {
+	public List<ProductModel> getListProduct(String sql,int sID) {
 		List<ProductModel> list = new ArrayList<ProductModel>();
 		try{
 			con = new DBConnection().getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, ShopID.sID);
+			ps.setInt(1, sID);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ProductModel pModel = new ProductModel();
@@ -548,12 +548,12 @@ public class ProductDaoImpl implements ProductDao{
 		return list;
 	}
 	@Override
-	public List<ProductModel> getTop4NewProduct() {
+	public List<ProductModel> getTop4NewProduct(int sID) {
 		String sql = "select top 4 * from Product where ShopID=? order by ProductID desc";
-		return this.getListProduct(sql);
+		return this.getListProduct(sql,sID);
 	}
 	@Override
-	public List<ProductModel> getTop4BestSeller() {
+	public List<ProductModel> getTop4BestSeller(int sID) {
 		// TODO Auto-generated method stub
 		String sql="select *\r\n" + 
 				"from Product,(select top 4 ProductID,sum(ReceiptDetail.Amount) as'SL' from Receipt,ReceiptDetail\r\n" + 
@@ -561,8 +561,9 @@ public class ProductDaoImpl implements ProductDao{
 				"group by ProductID\r\n" + 
 				"order by SL desc) as a\r\n" + 
 				"where Product.ProductID=a.ProductID";
-		return getListProduct(sql);
+		return getListProduct(sql,sID);
 	}
+	
 	
 
 }

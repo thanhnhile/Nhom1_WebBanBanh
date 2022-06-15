@@ -8,7 +8,6 @@ import java.util.List;
 import vn.ithcmute.connection.DBConnection;
 import vn.ithcmute.dao.CategoryDao;
 import vn.ithcmute.model.CategoryModel;
-import vn.ithcmute.util.ShopID;
 
 public class CategoryDaoImpl implements CategoryDao{
 	Connection con = null;
@@ -102,7 +101,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		return 0;
 	}
 	@Override
-	public List<CategoryModel> getListByShop() {
+	public List<CategoryModel> getListByShop(int sID) {
 		String sql="select distinct Category.CategoryID,CategoryName \r\n" + 
 				"from Category inner join Product on Category.CategoryID=Product.CategoryID\r\n" + 
 				"where ShopID=?";
@@ -110,7 +109,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		try {
 			con = new DBConnection().getConnection();
 			ps=con.prepareStatement(sql);
-			ps.setInt(1, ShopID.sID);
+			ps.setInt(1, sID);
 			rs = ps.executeQuery();
 			while(rs.next())
 			{

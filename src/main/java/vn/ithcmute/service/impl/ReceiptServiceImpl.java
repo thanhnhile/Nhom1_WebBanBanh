@@ -16,7 +16,7 @@ import vn.ithcmute.model.ReceiptModel;
 import vn.ithcmute.model.ShopModel;
 import vn.ithcmute.service.DeliveryDetailService;
 import vn.ithcmute.service.ReceiptService;
-import vn.ithcmute.util.ShopID;
+
 
 public class ReceiptServiceImpl implements ReceiptService{
 	ReceiptDao receiptDao = new ReceiptDaoImpl();
@@ -113,37 +113,37 @@ public class ReceiptServiceImpl implements ReceiptService{
 	}
 
 	@Override
-	public List<ReceiptModel> getListByShopID(String sql) {
+	public List<ReceiptModel> getListByShopID(String sql,int sID) {
 		// TODO Auto-generated method stub
-		return receiptDao.getListByShopID(sql);
+		return receiptDao.getListByShopID(sql,sID);
 	}
 
 	@Override
-	public List<ReceiptModel> getStateReceiptList(int stateID) {
+	public List<ReceiptModel> getStateReceiptList(int stateID,int sID) {
 		// TODO Auto-generated method stub
-		return receiptDao.getStateReceiptList(stateID);
+		return receiptDao.getStateReceiptList(stateID,sID);
 	}
 
 	@Override
-	public List<ReceiptModel> getListByDate(Date dateStart, Date dateEnd) {
+	public List<ReceiptModel> getListByDate(Date dateStart, Date dateEnd,int sID) {
 		// TODO Auto-generated method stub
-		return receiptDao.getListByDate(dateStart, dateEnd);
+		return receiptDao.getListByDate(dateStart, dateEnd,sID);
 	}
 
 	@Override
-	public int CountState(int stateID) {
+	public int CountState(int stateID,int sID) {
 		// TODO Auto-generated method stub
-		return receiptDao.CountState(stateID);
+		return receiptDao.countState(stateID, sID);
 	}
 
 	@Override
-	public int countAll() {
+	public int countAll(int sID) {
 		// TODO Auto-generated method stub
-		return receiptDao.countAll();
+		return receiptDao.countAll(sID);
 	}
 
 	@Override
-	public Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByShop(int state) {
+	public Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByShop(int state,int sID) {
 		// TODO Auto-generated method stub
 		Map<DeliveryDetailModel, List<ReceiptDetailModel>> map = new HashMap<DeliveryDetailModel, List<ReceiptDetailModel>>();
 		List<ReceiptModel> listReceipt = new ArrayList<ReceiptModel>();
@@ -153,11 +153,11 @@ public class ReceiptServiceImpl implements ReceiptService{
 		if(state==0) {
 			listReceipt = this.getAll();
 		}
-		else listReceipt = this.getStateReceiptList(state);
+		else listReceipt = this.getStateReceiptList(state,sID);
 		
 		for(ReceiptModel receipt : listReceipt) {
 			ShopModel shopModel = receipt.getsId();
-			if(shopModel.getsID()==ShopID.sID) {
+			if(shopModel.getsID()==sID) {
 				//Lay danh sach items theo ma hoa don
 				listDetail = detailService.getList(receipt.getrId());
 				//Lay thong tin giao hang theo ma hoa don
@@ -170,14 +170,14 @@ public class ReceiptServiceImpl implements ReceiptService{
 	}
 
 	@Override
-	public Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByDate(Date date1, Date date2) {
+	public Map<DeliveryDetailModel, List<ReceiptDetailModel>> getReceiptListByDate(Date date1, Date date2,int sID) {
 		// TODO Auto-generated method stub
 		Map<DeliveryDetailModel, List<ReceiptDetailModel>> map = new HashMap<DeliveryDetailModel, List<ReceiptDetailModel>>();
 		List<ReceiptModel> listReceipt = new ArrayList<ReceiptModel>();
 		List<ReceiptDetailModel> listDetail = new ArrayList<ReceiptDetailModel>();
 		DeliveryDetailModel deliveryDetailModel = new DeliveryDetailModel();
 		
-		listReceipt = this.getListByDate(date1,date2);
+		listReceipt = this.getListByDate(date1,date2,sID);
 		
 		for(ReceiptModel receipt : listReceipt) {
 			

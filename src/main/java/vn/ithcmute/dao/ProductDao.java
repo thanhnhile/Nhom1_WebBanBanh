@@ -15,21 +15,17 @@ public interface ProductDao {
 
 	ProductModel get(int id);
 
-	List<ProductModel> getAll();
-
 	void activeProduct(int pID, int state);
 
 	List<ProductModel> search(String txt);
 
 	List<ProductModel> getProductByCID(int cateID);
 
-	List<ProductModel> getActiveProduct();
 
-	List<ProductModel> getNoActiveProduct();
+	List<ProductModel> getNoActiveProduct(int sID);
 
-	List<ProductModel> getOutOfStockProduct();
+	List<ProductModel> getOutOfStockProduct(int sID);
 
-	int CountProduct();
 
 	List<ProductModel> getTop8New();
 	List<ProductModel> getTop8BestSeller();
@@ -47,15 +43,23 @@ public interface ProductDao {
 	Map<ShopModel, Integer> getAllShopByProduct();
 	
 	//Seller
-	int countNoneProduct();
 	
-	int countNoActiveProduct();
+	
+	int countNoActiveProduct(int sID);
 
-	int countActiveProduct();
+	int countActiveProduct(int sID);
 	
 	HashMap<Integer, Integer> getSoldAmount();
 
-	List<ProductModel> getTop4NewProduct();
 
-	List<ProductModel> getTop4BestSeller();
+	List<ProductModel> getTop4BestSeller(int sID);
+
+	List<ProductModel> getTop4NewProduct(int sID);
+
+	List<ProductModel> getActiveProduct(int sID);
+
+	int countNoneProduct(int sID);
+	List<ProductModel> getAllByShop(int sID);
+
+	int countProduct(int sID);
 }

@@ -2,3 +2,5 @@ eclipse.preferences.version=1
 encoding//src/main/java/vn/ithcmute/controller/LoginController.java=UTF-8
 encoding//src/main/java/vn/ithcmute/controller/ProductController.java=UTF-8
 encoding//src/main/java/vn/ithcmute/controller/RegisterController.java=UTF-8
+encoding//src/main/java/vn/ithcmute/controller/seller/SellerLoginController.java=UTF-8
+encoding//src/main/java/vn/ithcmute/controller/seller/ShopSettingController.java=UTF-8

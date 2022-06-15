@@ -14,28 +14,28 @@ public class StatisticsServiceImpl implements StatisticsService{
 	StatisticsDao dao  = new StatisticsDaoImpl();
 	
 	@Override
-	public List<StatisticsModel> getListAllReceipt() {
-		return dao.getListAllReceipt();
+	public List<StatisticsModel> getListAllReceipt(int sID) {
+		return dao.getListAllReceipt(sID);
 	}
 
 	@Override
-	public List<StatisticsModel> getListDeliveredReceipt() {
-		return dao.getListDeliveredReceipt();
+	public List<StatisticsModel> getListDeliveredReceipt(int sID) {
+		return dao.getListDeliveredReceipt(sID);
 	}
 
 	@Override
-	public List<StatisticsModel> getStatisticsCategory() {
-		return dao.getStatisticsCategory();
+	public List<StatisticsModel> getStatisticsCategory(int sID) {
+		return dao.getStatisticsCategory(sID);
 	}
 
 	@Override
-	public List<StatisticsModel> getStatisticsProduct() {
-		return dao.getStatisticsProduct();
+	public List<StatisticsModel> getStatisticsProduct(int sID) {
+		return dao.getStatisticsProduct(sID);
 	}
 
 	@Override
-	public List<StatisticsModel> getStatistics(String sql) {
-		return dao.getStatistics(sql);
+	public List<StatisticsModel> getStatistics(String sql,int sID) {
+		return dao.getStatistics(sql,sID);
 	}
 
 }
